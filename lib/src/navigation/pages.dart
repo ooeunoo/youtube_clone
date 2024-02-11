@@ -1,5 +1,4 @@
 import 'package:clone_flutter_youtube/src/app.dart';
-import 'package:clone_flutter_youtube/src/screens/video_detail/video_detail.dart';
 import 'package:get/get.dart';
 
 part 'routes.dart';
@@ -18,6 +17,5 @@ class AppPages {
       preventDuplicates: true,
       // middlewares: [AuthenticationMiddleware()],
     ),
-    GetPage(name: _Paths.videoDetail, page: () => const VideoDetail())
   ];
 }

@@ -1,7 +1,12 @@
+import 'package:clone_flutter_youtube/src/types/youtube.dart';
 import 'package:flutter/material.dart';
 
 class VideoDetail extends StatelessWidget {
-  const VideoDetail({Key? key}) : super(key: key);
+  final Video video;
+  final Channel? channel;
+
+  const VideoDetail({Key? key, required this.video, this.channel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +14,7 @@ class VideoDetail extends StatelessWidget {
       color: Colors.white,
       child: Column(children: [
         Container(height: 250, color: Colors.grey.withOpacity(0.5)),
-        _Description(),
+        _Description(video),
         _User(),
         _Statistics(),
         _Comments()
@@ -18,7 +23,10 @@ class VideoDetail extends StatelessWidget {
   }
 }
 
-Widget _Description() {
+Widget _Description(
+  Video video,
+) {
+  final videoTitle = video.snippet.title;
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child: Align(
@@ -28,7 +36,7 @@ Widget _Description() {
         spacing: 10,
         children: [
           Text(
-            "개발하는 남자 유튜브 영상 다시보기",
+            videoTitle,
             style:
                 TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.5)),
           ),

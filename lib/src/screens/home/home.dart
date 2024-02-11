@@ -1,30 +1,13 @@
 import 'package:clone_flutter_youtube/src/screens/home/components/header/home_app_bar.dart';
+import 'package:clone_flutter_youtube/src/screens/home/components/video/video_detail.dart';
 import 'package:clone_flutter_youtube/src/screens/home/components/video/video_summary.dart';
 import 'package:clone_flutter_youtube/src/services/youtube_service.dart';
 import 'package:clone_flutter_youtube/src/theme/own_theme.dart';
 import 'package:clone_flutter_youtube/src/types/youtube.dart';
+import 'package:clone_flutter_youtube/src/utils/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'dart:async';
-
-import 'package:flutter/foundation.dart';
-
-class Debouncer {
-  final int milliseconds;
-  Timer? _timer;
-
-  Debouncer({required this.milliseconds});
-
-  void run(VoidCallback action) {
-    _timer?.cancel();
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
-  }
-
-  void dispose() {
-    _timer?.cancel();
-  }
-}
 
 class Home extends HookWidget {
   const Home({Key? key}) : super(key: key);
@@ -32,21 +15,23 @@ class Home extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final debouncer = Debouncer(milliseconds: 200);
+    final isMounted = useIsMounted();
 
     final videos = useState<List<Video>>([]);
     final nextPageToken = useState<String?>(null);
     final scrollController = useScrollController();
 
     void load() async {
-      print(nextPageToken.value);
-      final result = await YoutubeService().getVideos(nextPageToken.value);
-      if (result != null) {
-        nextPageToken.value = result.nextPageToken;
+      if (isMounted()) {
+        final result = await YoutubeService().getVideos(nextPageToken.value);
+        if (result != null) {
+          nextPageToken.value = result.nextPageToken;
 
-        if (result.items != null) {
-          final updatedVideos = List.of(videos.value); // 기존 리스트 복사
-          updatedVideos.addAll(result.items!); // 새로운 비디오 데이터 추가
-          videos.value = updatedVideos; // 상태 업데이트
+          if (result.items != null) {
+            final updatedVideos = List.of(videos.value);
+            updatedVideos.addAll(result.items!);
+            videos.value = updatedVideos;
+          }
         }
       }
     }
@@ -66,6 +51,20 @@ class Home extends HookWidget {
       });
       return null;
     }, [scrollController]);
+
+    void openDetail(Channel? channel, Video video) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return AnimatedPadding(
+              padding: const EdgeInsets.only(bottom: 10),
+              duration: const Duration(milliseconds: 300),
+              child: VideoDetail(channel: channel, video: video));
+        },
+      );
+    }
+
     return SafeArea(
       child: RawScrollbar(
         controller: scrollController,
@@ -84,44 +83,41 @@ class Home extends HookWidget {
             SliverList(
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  Get.toNamed('/video/243434');
+              return HookBuilder(
+                builder: (context) {
+                  final video = videos.value[index];
+                  final channel = useState<Channel?>(null);
+                  final isMounted = useIsMounted();
+
+                  void loadChannel() async {
+                    final result = await YoutubeService()
+                        .getChannel(videos.value[index].snippet.channelId);
+                    if (result != null && isMounted()) {
+                      channel.value =
+                          result.items.isNotEmpty ? result.items[0] : null;
+                    }
+                  }
+
+                  useEffect(() {
+                    loadChannel();
+                    return () {};
+                  }, []);
+                  return GestureDetector(
+                    onTap: () {
+                      openDetail(channel.value, video);
+                    },
+                    child: VideoSummary(
+                      key: ValueKey<String>(video.id),
+                      video: video,
+                      channel: channel.value,
+                    ),
+                  );
                 },
-                child: VideoSummary(
-                  key: ValueKey<String>(videos.value[index].id),
-                  video: videos.value[index],
-                ),
               );
             }, childCount: videos.value.length))
           ],
         ),
       ),
     );
-
-    // return SafeArea(
-    //     child: CustomScrollView(
-    //   controller: scrollController,
-    //   slivers: [
-    //     const SliverAppBar(
-    //       title: HomeAppBar(),
-    //       floating: true,
-    //       snap: true,
-    //     ),
-    //     SliverList(
-    //         delegate:
-    //             SliverChildBuilderDelegate((BuildContext context, int index) {
-    //       return GestureDetector(
-    //         onTap: () {
-    //           Get.toNamed('/video/243434');
-    //         },
-    //         child: VideoSummary(
-    //           key: ValueKey<String>(videos.value[index].id),
-    //           video: videos.value[index],
-    //         ),
-    //       );
-    //     }, childCount: videos.value.length))
-    //   ],
-    // ));
   }
 }

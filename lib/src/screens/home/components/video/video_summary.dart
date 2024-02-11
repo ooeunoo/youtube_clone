@@ -7,33 +7,20 @@ import 'package:intl/intl.dart';
 
 class VideoSummary extends HookWidget {
   final Video video;
+  final Channel? channel;
 
-  const VideoSummary({Key? key, required this.video}) : super(key: key);
+  const VideoSummary({Key? key, required this.video, this.channel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final channel = useState<Channel?>(null);
-    final isMounted = useIsMounted();
-
-    void loadChannel() async {
-      final result = await YoutubeService().getChannel(video.snippet.channelId);
-      if (result != null && isMounted()) {
-        channel.value = result.items.isNotEmpty ? result.items[0] : null;
-      }
-    }
-
-    useEffect(() {
-      loadChannel();
-      return () {};
-    }, []);
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: [
           _Thumbnail(video),
           const SizedBox(height: 5),
-          _SimpleInformation(context, channel.value, video),
+          _SimpleInformation(context, channel, video),
         ],
       ),
     );
@@ -43,8 +30,6 @@ class VideoSummary extends HookWidget {
 Widget _Thumbnail(Video video) {
   final Thumbnail thumbnail = video.snippet.thumbnails.medium;
   final String url = thumbnail.url;
-  final double width = thumbnail.width.toDouble();
-  final double height = thumbnail.height.toDouble();
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,7 +48,6 @@ Widget _SimpleInformation(BuildContext context, Channel? channel, Video video) {
   // Video
   final VideoSnippet snippet = video.snippet;
   final String title = snippet.title;
-  final String description = snippet.description;
   final String channelTitle = snippet.channelTitle;
   final DateTime publishTime = snippet.publishedAt;
   final VideoStatistics statistics = video.statistics;
