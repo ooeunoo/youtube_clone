@@ -32,7 +32,7 @@ class App extends HookWidget {
     Widget changeBody(int index) {
       switch (BottomTab.values[index]) {
         case BottomTab.home:
-          return const Home();
+          return Home();
         case BottomTab.shorts:
           return const Shorts();
         case BottomTab.subscriptions:

@@ -12,14 +12,14 @@ String videoToJson(VideoListResponse data) => json.encode(data.toJson());
 class VideoListResponse {
   String kind;
   String etag;
-  List<Video> items;
+  List<Video>? items; // Making items nullable
   String nextPageToken;
   PageInfo pageInfo;
 
   VideoListResponse({
     required this.kind,
     required this.etag,
-    required this.items,
+    this.items, // Nullable parameter
     required this.nextPageToken,
     required this.pageInfo,
   });
@@ -28,7 +28,9 @@ class VideoListResponse {
       VideoListResponse(
         kind: json["kind"],
         etag: json["etag"],
-        items: List<Video>.from(json["items"].map((x) => Video.fromJson(x))),
+        items: json["items"] != null
+            ? List<Video>.from(json["items"].map((x) => Video.fromJson(x)))
+            : null, // Check if items is null
         nextPageToken: json["nextPageToken"],
         pageInfo: PageInfo.fromJson(json["pageInfo"]),
       );
@@ -36,7 +38,9 @@ class VideoListResponse {
   Map<String, dynamic> toJson() => {
         "kind": kind,
         "etag": etag,
-        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+        "items": items != null
+            ? List<dynamic>.from(items!.map((x) => x.toJson()))
+            : null, // Convert items to JSON only if it's not null
         "nextPageToken": nextPageToken,
         "pageInfo": pageInfo.toJson(),
       };
@@ -161,14 +165,12 @@ class VideoThumbnails {
   Thumbnail medium;
   Thumbnail high;
   Thumbnail standard;
-  Thumbnail maxres;
 
   VideoThumbnails({
     required this.thumbnailsDefault,
     required this.medium,
     required this.high,
     required this.standard,
-    required this.maxres,
   });
 
   factory VideoThumbnails.fromJson(Map<String, dynamic> json) =>
@@ -177,7 +179,6 @@ class VideoThumbnails {
         medium: Thumbnail.fromJson(json["medium"]),
         high: Thumbnail.fromJson(json["high"]),
         standard: Thumbnail.fromJson(json["standard"]),
-        maxres: Thumbnail.fromJson(json["maxres"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -185,7 +186,6 @@ class VideoThumbnails {
         "medium": medium.toJson(),
         "high": high.toJson(),
         "standard": standard.toJson(),
-        "maxres": maxres.toJson(),
       };
 }
 
@@ -312,7 +312,6 @@ class Channel {
 class ChannelSnippet {
   String title;
   String description;
-  String customUrl;
   DateTime publishedAt;
   ChannelThumbnails thumbnails;
   Localized localized;
@@ -320,7 +319,6 @@ class ChannelSnippet {
   ChannelSnippet({
     required this.title,
     required this.description,
-    required this.customUrl,
     required this.publishedAt,
     required this.thumbnails,
     required this.localized,
@@ -329,7 +327,6 @@ class ChannelSnippet {
   factory ChannelSnippet.fromJson(Map<String, dynamic> json) => ChannelSnippet(
         title: json["title"],
         description: json["description"],
-        customUrl: json["customUrl"],
         publishedAt: DateTime.parse(json["publishedAt"]),
         thumbnails: ChannelThumbnails.fromJson(json["thumbnails"]),
         localized: Localized.fromJson(json["localized"]),
@@ -338,7 +335,6 @@ class ChannelSnippet {
   Map<String, dynamic> toJson() => {
         "title": title,
         "description": description,
-        "customUrl": customUrl,
         "publishedAt": publishedAt.toIso8601String(),
         "thumbnails": thumbnails.toJson(),
         "localized": localized.toJson(),

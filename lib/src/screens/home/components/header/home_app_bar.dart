@@ -15,11 +15,12 @@ class HomeAppBar extends StatelessWidget {
 }
 
 Widget _Logo() {
-  return const CustomIcon(
-    AssetPath.youtubePremiumLogo,
-    size: 24,
-    useDefaultColorFilter: true,
-  );
+  return Container();
+  // return const CustomIcon(
+  //   AssetPath.youtubePremiumLogo,
+  //   size: 24,
+  //   useDefaultColorFilter: true,
+  // );
 }
 
 Widget _Menu() {

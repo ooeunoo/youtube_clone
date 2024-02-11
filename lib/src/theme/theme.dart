@@ -1,8 +1,8 @@
+import 'package:clone_flutter_youtube/src/theme/own_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
-    useMaterial3: true,
     fontFamily: GoogleFonts.notoSans().fontFamily,
     textTheme: const TextTheme(
       titleLarge: TextStyle(color: Color(0xff0f0f0f), fontSize: 16),
@@ -40,7 +40,9 @@ ThemeData lightMode = ThemeData(
         // landscapeLayout: "",
         // mouseCursor: "",
         ),
-    appBarTheme: const AppBarTheme(backgroundColor: Color(0xffffffff)));
+    appBarTheme: const AppBarTheme(backgroundColor: Color(0xffffffff)))
+  ..addOwn(OwnThemeFields(
+      scrollbarThumbColor: const Color(0xff0f0f0f).withOpacity(0.7)));
 
 ThemeData darkMode = ThemeData(
     useMaterial3: true,
@@ -65,6 +67,14 @@ ThemeData darkMode = ThemeData(
         thumbColor: MaterialStateProperty.all(Colors.black),
         trackColor: MaterialStateProperty.all(const Color(0xffDEDEDE))),
     scaffoldBackgroundColor: const Color(0xff0f0f0f),
+    scrollbarTheme: const ScrollbarThemeData().copyWith(
+      thumbColor: MaterialStateProperty.all(Colors.red),
+      trackColor: MaterialStateProperty.all(Colors.red),
+      thickness: MaterialStateProperty.all(8.0),
+      radius: const Radius.circular(4.0),
+      thumbVisibility: MaterialStateProperty.all(true),
+      trackVisibility: MaterialStateProperty.all(true),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color(0xff0f0f0f),
@@ -82,4 +92,6 @@ ThemeData darkMode = ThemeData(
         // landscapeLayout: "",
         // mouseCursor: "",
         ),
-    appBarTheme: const AppBarTheme(backgroundColor: Color(0xff0f0f0f)));
+    appBarTheme: const AppBarTheme(backgroundColor: Color(0xff0f0f0f)))
+  ..addOwn(OwnThemeFields(
+      scrollbarThumbColor: const Color(0xfff1f1f1).withOpacity(0.7)));

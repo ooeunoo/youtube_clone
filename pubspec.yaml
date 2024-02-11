@@ -44,6 +44,7 @@ dependencies:
   flutter_hooks: ^0.20.4
   http: ^1.2.0
   google_fonts: ^6.1.0
+  lodash_flutter: ^0.0.3
   
 dev_dependencies:
   flutter_test:

@@ -5,35 +5,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 
-class VideoSummary extends HookWidget {
+class VideoSummary extends StatefulWidget {
   final Video video;
 
   const VideoSummary({Key? key, required this.video}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final channel = useState<Channel?>(null);
-    final isMounted = useIsMounted();
+  _VideoSummaryState createState() => _VideoSummaryState();
+}
 
-    void loadChannel() async {
-      final result = await YoutubeService().getChannel(video.snippet.channelId);
-      if (result != null && isMounted()) {
-        channel.value = result.items.isNotEmpty ? result.items[0] : null;
-      }
+class _VideoSummaryState extends State<VideoSummary> {
+  Channel? _channel;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadChannel();
+  }
+
+  void _loadChannel() async {
+    final result =
+        await YoutubeService().getChannel(widget.video.snippet.channelId);
+    if (result != null && mounted) {
+      setState(() {
+        _channel = result.items.isNotEmpty ? result.items[0] : null;
+      });
     }
+  }
 
-    useEffect(() {
-      loadChannel();
-      return () {};
-    }, []);
-
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: [
-          _Thumbnail(video),
+          _Thumbnail(widget.video),
           const SizedBox(height: 5),
-          _SimpleInformation(context, channel.value, video),
+          if (_channel != null)
+            _SimpleInformation(context, _channel!, widget.video),
+          // Display _SimpleInformation only if _channel is not null
         ],
       ),
     );
