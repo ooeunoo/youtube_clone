@@ -8,6 +8,7 @@ ThemeData lightMode = ThemeData(
       titleLarge: TextStyle(color: Color(0xff0f0f0f), fontSize: 16),
       titleMedium: TextStyle(color: Color(0xff0f0f0f), fontSize: 14),
       titleSmall: TextStyle(color: Color(0xff0f0f0f), fontSize: 12),
+      labelLarge: TextStyle(color: Color(0xff606060), fontSize: 12),
       labelMedium: TextStyle(color: Color(0xff606060), fontSize: 10),
       labelSmall: TextStyle(color: Color(0xff606060), fontSize: 6),
     ),
@@ -23,6 +24,8 @@ ThemeData lightMode = ThemeData(
         thumbColor: MaterialStateProperty.all(Colors.white),
         trackColor: MaterialStateProperty.all(const Color(0xff9279C8))),
     scaffoldBackgroundColor: const Color(0xffffffff),
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: Color(0xffffffff)),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color(0xffffffff),
@@ -54,6 +57,7 @@ ThemeData darkMode = ThemeData(
       ),
       titleMedium: TextStyle(color: Color(0xfff1f1f1), fontSize: 14),
       titleSmall: TextStyle(color: Color(0xfff1f1f1), fontSize: 12),
+      labelLarge: TextStyle(color: Color(0xffaaaaaa), fontSize: 12),
       labelMedium: TextStyle(color: Color(0xffaaaaaa), fontSize: 10),
       labelSmall: TextStyle(color: Color(0xffaaaaaa), fontSize: 6),
     ),
@@ -67,6 +71,8 @@ ThemeData darkMode = ThemeData(
         thumbColor: MaterialStateProperty.all(Colors.black),
         trackColor: MaterialStateProperty.all(const Color(0xffDEDEDE))),
     scaffoldBackgroundColor: const Color(0xff0f0f0f),
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: Color(0xff0f0f0f)),
     scrollbarTheme: const ScrollbarThemeData().copyWith(
       thumbColor: MaterialStateProperty.all(Colors.red),
       trackColor: MaterialStateProperty.all(Colors.red),

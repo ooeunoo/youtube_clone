@@ -54,15 +54,12 @@ class Home extends HookWidget {
 
     void openDetail(Channel? channel, Video video) {
       showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return AnimatedPadding(
-              padding: const EdgeInsets.only(bottom: 10),
-              duration: const Duration(milliseconds: 300),
-              child: VideoDetail(channel: channel, video: video));
-        },
-      );
+          useSafeArea: true,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext context) {
+            return VideoDetail(channel: channel, video: video);
+          });
     }
 
     return SafeArea(
