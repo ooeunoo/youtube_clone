@@ -1,5 +1,10 @@
+import 'package:clone_flutter_youtube/src/models/youtube/channel/channel.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/thumbnail/thumbnail.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/video/video.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/videoSnippet/video_snippet.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/videoStatistics/video_statistics.dart';
 import 'package:clone_flutter_youtube/src/services/youtube_service.dart';
-import 'package:clone_flutter_youtube/src/types/youtube.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/youtube.dart';
 import 'package:clone_flutter_youtube/src/utils/number.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -62,7 +67,7 @@ Widget _SimpleInformation(BuildContext context, Channel? channel, Video video) {
     padding: const EdgeInsets.only(left: 10, bottom: 20),
     child: Row(children: [
       CircleAvatar(
-        radius: 20,
+        radius: 15,
         backgroundColor: Colors.grey.withOpacity(0.5),
         backgroundImage: channelThumbnailUrl != null
             ? NetworkImage(channelThumbnailUrl)

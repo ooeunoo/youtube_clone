@@ -1,9 +1,11 @@
+import 'package:clone_flutter_youtube/src/models/youtube/channel/channel.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/video/video.dart';
 import 'package:clone_flutter_youtube/src/screens/home/components/header/home_app_bar.dart';
 import 'package:clone_flutter_youtube/src/screens/home/components/video/video_detail.dart';
 import 'package:clone_flutter_youtube/src/screens/home/components/video/video_summary.dart';
 import 'package:clone_flutter_youtube/src/services/youtube_service.dart';
 import 'package:clone_flutter_youtube/src/theme/own_theme.dart';
-import 'package:clone_flutter_youtube/src/types/youtube.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/youtube.dart';
 import 'package:clone_flutter_youtube/src/utils/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

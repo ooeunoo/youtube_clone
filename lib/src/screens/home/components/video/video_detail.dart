@@ -1,4 +1,11 @@
-import 'package:clone_flutter_youtube/src/types/youtube.dart';
+import 'package:clone_flutter_youtube/src/components/icon/custom_icon.dart';
+import 'package:clone_flutter_youtube/src/constants/asset_path.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/channel/channel.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/thumbnail/thumbnail.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/video/video.dart';
+import 'package:clone_flutter_youtube/src/theme/own_theme.dart';
+import 'package:clone_flutter_youtube/src/models/asset/asset.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/youtube.dart';
 import 'package:clone_flutter_youtube/src/utils/number.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,8 +24,8 @@ class VideoDetail extends StatelessWidget {
       _Streaming(video),
       _Description(context, video),
       _User(context, channel),
-      _Statistics(),
-      _Comments()
+      _Statistics(context, video),
+      _Comments(context, video)
     ]);
   }
 }
@@ -29,7 +36,7 @@ Widget _Streaming(Video video) {
     initialVideoId: videoId,
     flags: const YoutubePlayerFlags(
       mute: false,
-      autoPlay: true,
+      autoPlay: false,
     ),
   );
 
@@ -60,7 +67,7 @@ Widget _Description(
   final publishedAt = video.snippet.publishedAt;
 
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     child: Align(
       alignment: Alignment.topLeft,
       child: Column(
@@ -108,7 +115,7 @@ Widget _User(BuildContext context, Channel? channel) {
   final String? channelSubscriber = channel?.statistics.subscriberCount;
 
   return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -148,12 +155,9 @@ Widget _User(BuildContext context, Channel? channel) {
                 color: Colors.white, // Example color
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
+              child: Text(
                 "Subscribe",
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).own().accentTitleMedium,
               ),
             ),
           ),
@@ -161,23 +165,33 @@ Widget _User(BuildContext context, Channel? channel) {
       ));
 }
 
-Widget _Statistics() {
-  Widget StaticButton(String title) {
+Widget _Statistics(BuildContext context, Video video) {
+  final String videoLike = video.statistics.likeCount;
+
+  Widget StaticButton(Asset iconPath, String title, Function? onTap) {
     return GestureDetector(
-      onTap: () {
-        // Handle the tap event for the first container
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(50), // Rounded corners
-        ),
-        width: 100,
-        height: 30, // Increased height for better touch target
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(color: Colors.white),
+      onTap: null,
+      child: SizedBox(
+        height: 40,
+        child: Card(
+          color: Theme.of(context).cardColor,
+          shape: RoundedRectangleBorder(
+            // side: const BorderSide(color: Colors.white70, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomIcon(iconPath),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(title, style: Theme.of(context).textTheme.titleSmall),
+              ],
+            ),
           ),
         ),
       ),
@@ -185,44 +199,59 @@ Widget _Statistics() {
   }
 
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          StaticButton('좋아요'),
-          const SizedBox(width: 10), // Add spacing between buttons
-          StaticButton('좋아요'),
-          const SizedBox(width: 10),
-          StaticButton('좋아요'),
-          const SizedBox(width: 10),
-          StaticButton('좋아요'),
+          StaticButton(
+              AssetPath.like, formatNumberUnit(int.parse(videoLike)), null),
+          const SizedBox(width: 3), // Add spacing between buttons
+          StaticButton(AssetPath.share, 'Share', null),
+          const SizedBox(width: 3),
+          StaticButton(AssetPath.flag, 'Report', null),
+          const SizedBox(width: 3),
+          StaticButton(AssetPath.scissors, 'Clip', null),
+          const SizedBox(width: 3),
+          StaticButton(AssetPath.save, 'Save', null),
         ],
       ),
     ),
   );
 }
 
-Widget _Comments() {
+Widget _Comments(BuildContext context, Video video) {
+  final commentCount = video.statistics.commentCount;
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     child: Card(
-      color: Colors.white,
-      elevation: 2,
+      color: Theme.of(context).cardColor,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(children: [
           Row(
             children: [
-              Text("Comments",
-                  style: TextStyle(color: Colors.black.withOpacity(0.5))),
-              Text("리뷰 갯수",
-                  style: TextStyle(color: Colors.black.withOpacity(0.5)))
+              Text("Comments", style: Theme.of(context).textTheme.titleSmall),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(formatNumberUnit(int.parse(commentCount)),
+                  style: Theme.of(context).textTheme.labelMedium)
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Row(
             children: [
-              const CircleAvatar(),
+              CircleAvatar(
+                radius: 15,
+                backgroundColor: Colors.grey.withOpacity(0.5),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
               Text("진짜 진자 굿",
                   style: TextStyle(color: Colors.black.withOpacity(0.5)))
             ],

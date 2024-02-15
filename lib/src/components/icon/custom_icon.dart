@@ -1,4 +1,4 @@
-import 'package:clone_flutter_youtube/src/types/asset.dart';
+import 'package:clone_flutter_youtube/src/models/asset/asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:ui' as ui;
@@ -23,7 +23,7 @@ class CustomIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(asset.path,
+    return SvgPicture.asset(asset.uploadIcon,
         width: size, // size가 널이면 해당 매개변수 자체를 전달하지 않음
         height: size,
         fit: fit,

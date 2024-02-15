@@ -1,4 +1,4 @@
-import 'package:clone_flutter_youtube/src/types/asset.dart';
+import 'package:clone_flutter_youtube/src/models/asset/asset.dart';
 
 class AssetString {
   static const String backIcon = 'assets/svg/icons/back.svg';
@@ -31,35 +31,46 @@ class AssetString {
   static const String youtubeLogoIcon = 'assets/svg/icons/youtube_logo.svg';
   static const String youtubePremiumLogoIcon =
       'assets/svg/icons/youtube_premium_logo.svg';
+  static const String downloadIcon = 'assets/svg/icons/download.svg';
+  static const String flagIcon = 'assets/svg/icons/flag.svg';
+  static const String scissorsIcon = 'assets/svg/icons/scissors.svg';
+  static const String folderIcon = 'assets/svg/icons/folder.svg';
+  static const String microphoneIcon = 'assets/svg/icons/microphone.svg';
+  static const String leftArrowIcon = 'assets/svg/icons/left_arrow.svg';
 }
 
 class AssetPath {
-  static const Asset back = Asset(AssetString.backIcon);
-  static const Asset bell = Asset(AssetString.bellIcon);
-  static const Asset airplay = Asset(AssetString.airplayIcon);
-  static const Asset broadcast = Asset(AssetString.broadcastIcon);
-  static const Asset close = Asset(AssetString.closeIcon);
-  static const Asset compassOff = Asset(AssetString.compassOffIcon);
-  static const Asset compassOn = Asset(AssetString.compassOnIcon);
-  static const Asset dislike = Asset(AssetString.dislikeIcon);
-  static const Asset like = Asset(AssetString.likeIcon);
-  static const Asset homeOff = Asset(AssetString.homeOffIcon);
-  static const Asset homeOn = Asset(AssetString.homeOnIcon);
-  static const Asset librayOff = Asset(AssetString.librayOffIcon);
-  static const Asset libraryOn = Asset(AssetString.libraryOnIcon);
-  static const Asset plus = Asset(AssetString.plusIcon);
-  static const Asset profileOff = Asset(AssetString.profileOffIcon);
-  static const Asset profileOn = Asset(AssetString.profileOnIcon);
-  static const Asset save = Asset(AssetString.saveIcon);
-  static const Asset search = Asset(AssetString.searchIcon);
-  static const Asset share = Asset(AssetString.shareIcon);
-  static const Asset shortsOff = Asset(AssetString.shortsOffIcon);
-  static const Asset shortsOn = Asset(AssetString.shortsOnIcon);
-  static const Asset subscriptionOff = Asset(AssetString.subscriptionOffIcon);
-  static const Asset subscriptionOn = Asset(AssetString.subscriptionOnIcon);
-  static const Asset upload = Asset(AssetString.uploadIcon);
-  static const Asset wallClock = Asset(AssetString.wallClockIcon);
-  static const Asset youtubeLogo = Asset(AssetString.youtubeLogoIcon);
-  static const Asset youtubePremiumLogo =
-      Asset(AssetString.youtubePremiumLogoIcon);
+  static Asset back = Asset(AssetString.backIcon);
+  static Asset bell = Asset(AssetString.bellIcon);
+  static Asset airplay = Asset(AssetString.airplayIcon);
+  static Asset broadcast = Asset(AssetString.broadcastIcon);
+  static Asset close = Asset(AssetString.closeIcon);
+  static Asset compassOff = Asset(AssetString.compassOffIcon);
+  static Asset compassOn = Asset(AssetString.compassOnIcon);
+  static Asset dislike = Asset(AssetString.dislikeIcon);
+  static Asset like = Asset(AssetString.likeIcon);
+  static Asset homeOff = Asset(AssetString.homeOffIcon);
+  static Asset homeOn = Asset(AssetString.homeOnIcon);
+  static Asset librayOff = Asset(AssetString.librayOffIcon);
+  static Asset libraryOn = Asset(AssetString.libraryOnIcon);
+  static Asset plus = Asset(AssetString.plusIcon);
+  static Asset profileOff = Asset(AssetString.profileOffIcon);
+  static Asset profileOn = Asset(AssetString.profileOnIcon);
+  static Asset save = Asset(AssetString.saveIcon);
+  static Asset search = Asset(AssetString.searchIcon);
+  static Asset share = Asset(AssetString.shareIcon);
+  static Asset shortsOff = Asset(AssetString.shortsOffIcon);
+  static Asset shortsOn = Asset(AssetString.shortsOnIcon);
+  static Asset subscriptionOff = Asset(AssetString.subscriptionOffIcon);
+  static Asset subscriptionOn = Asset(AssetString.subscriptionOnIcon);
+  static Asset upload = Asset(AssetString.uploadIcon);
+  static Asset wallClock = Asset(AssetString.wallClockIcon);
+  static Asset youtubeLogo = Asset(AssetString.youtubeLogoIcon);
+  static Asset youtubePremiumLogo = Asset(AssetString.youtubePremiumLogoIcon);
+  static Asset download = Asset(AssetString.downloadIcon);
+  static Asset flag = Asset(AssetString.flagIcon);
+  static Asset scissors = Asset(AssetString.scissorsIcon);
+  static Asset folder = Asset(AssetString.folderIcon);
+  static Asset microphone = Asset(AssetString.microphoneIcon);
+  static Asset leftArrow = Asset(AssetString.leftArrowIcon);
 }

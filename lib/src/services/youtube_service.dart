@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:clone_flutter_youtube/src/constants/env.dart';
-import 'package:clone_flutter_youtube/src/types/youtube.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/channelResponse/channel_response.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/videoListResponse/video_list_response.dart';
+import 'package:clone_flutter_youtube/src/models/youtube/youtube.dart';
 import 'package:clone_flutter_youtube/src/utils/uri.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,6 +36,7 @@ class YoutubeService {
 
       return null;
     } catch (e) {
+      print(e);
       log(e.toString());
       return null;
     }
@@ -63,29 +66,4 @@ class YoutubeService {
       return null;
     }
   }
-
-  // Future<VideoListResponse?> getVideo(String videoId) async {
-  //   try {
-  //     Map<String, String> params = {
-  //       'key': ENV.youtubeApiKey,
-  //       'part': 'statistics',
-  //       'id': videoId
-  //     };
-
-  //     final Uri uri = generateQueryParamUri("${baseUri}video", params);
-
-  //     final response = await http.get(uri);
-
-  //     if (response.statusCode == 200) {
-  //       var data = jsonDecode(response.body.toString());
-  //       VideoListResponse result = VideoListResponse.fromJson(data);
-  //       return result;
-  //     }
-
-  //     return null;
-  //   } catch (e) {
-  //     log(e.toString());
-  //     return null;
-  //   }
-  // }
 }

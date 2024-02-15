@@ -50,7 +50,7 @@ class App extends HookWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: bottomTabIndex.value,
         onTap: changeBottomNaviagtionIndex,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: CustomIcon(AssetPath.homeOff),
             activeIcon: CustomIcon(AssetPath.homeOn),

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 class OwnThemeFields {
   final Color? scrollbarThumbColor;
   final Color? textBaloon;
+  final TextStyle? accentTitleMedium;
 
-  const OwnThemeFields({Color? scrollbarThumbColor, Color? textBaloon})
-      : scrollbarThumbColor = scrollbarThumbColor,
-        textBaloon = textBaloon;
+  OwnThemeFields(
+      {this.scrollbarThumbColor, this.textBaloon, this.accentTitleMedium});
 
   factory OwnThemeFields.empty() {
-    return const OwnThemeFields();
+    return OwnThemeFields();
   }
 }
 
