@@ -1,11 +1,11 @@
 import 'package:clone_flutter_youtube/src/component/icon/custom_icon.dart';
 import 'package:clone_flutter_youtube/src/constant/asset_path.dart';
 import 'package:clone_flutter_youtube/src/route/app_router.dart';
-import 'package:clone_flutter_youtube/src/screen/home/components/header/search_page.dart';
+import 'package:clone_flutter_youtube/src/component/header/search_page.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
+class MainAppBar extends StatelessWidget {
+  const MainAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

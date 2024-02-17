@@ -44,6 +44,10 @@ class AssetString {
       'assets/icons/png/youtube_light.png';
   static const String youtubeDarkLogoIcon = 'assets/icons/png/youtube_dark.png';
   static const String personBlockIcon = 'assets/icons/svg/person_block.svg';
+  static const String menuVerticalIcon = 'assets/icons/svg/menu_vertical.svg';
+  static const String commentIcon = 'assets/icons/svg/comment.svg';
+  static const String exchangeIcon = 'assets/icons/svg/exchange.svg';
+  static const String shortBackground = 'assets/icons/jpg/short_background.jpg';
 }
 
 class AssetPath {
@@ -86,4 +90,8 @@ class AssetPath {
   static Asset youtubeLightLogo = Asset(AssetString.youtubeLightLogoIcon);
   static Asset youtubeDarkLogo = Asset(AssetString.youtubeDarkLogoIcon);
   static Asset personBlock = Asset(AssetString.personBlockIcon);
+  static Asset menuVertical = Asset(AssetString.menuVerticalIcon);
+  static Asset comment = Asset(AssetString.commentIcon);
+  static Asset exchange = Asset(AssetString.exchangeIcon);
+  static Asset shortBackground = Asset(AssetString.shortBackground);
 }

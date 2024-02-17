@@ -65,4 +65,29 @@ class YoutubeService {
       return null;
     }
   }
+
+  Future<ChannelResponse?> getShorts() async {
+    try {
+      Map<String, String> params = {
+        'key': ENV.youtubeApiKey,
+        'part': 'id,snippet,status,statistics',
+        'type': 'playlist'
+      };
+
+      final Uri uri = generateQueryParamUri("${baseUri}search", params);
+
+      final response = await http.get(uri);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body.toString());
+        ChannelResponse result = ChannelResponse.fromJson(data);
+        return result;
+      }
+
+      return null;
+    } catch (e) {
+      print(e);
+      log(e.toString());
+      return null;
+    }
+  }
 }

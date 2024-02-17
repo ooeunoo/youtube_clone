@@ -1,6 +1,6 @@
 import 'package:clone_flutter_youtube/src/model/youtube/channel/channel.dart';
 import 'package:clone_flutter_youtube/src/model/youtube/video/video.dart';
-import 'package:clone_flutter_youtube/src/screen/home/components/header/home_app_bar.dart';
+import 'package:clone_flutter_youtube/src/component/header/app_bar.dart';
 import 'package:clone_flutter_youtube/src/screen/home/components/video/video_detail.dart';
 import 'package:clone_flutter_youtube/src/screen/home/components/video/video_summary.dart';
 import 'package:clone_flutter_youtube/src/service/youtube_service.dart';
@@ -73,7 +73,7 @@ class Home extends HookWidget {
           controller: scrollController,
           slivers: [
             const SliverAppBar(
-              title: HomeAppBar(),
+              title: MainAppBar(),
               floating: true,
               snap: true,
             ),
