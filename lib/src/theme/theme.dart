@@ -54,6 +54,7 @@ ThemeData lightMode = ThemeData(
   ..addOwn(OwnThemeFields(
     scrollbarThumbColor: const Color(0xff0f0f0f).withOpacity(0.7),
     accentTitleMedium: const TextStyle(color: Color(0xffffffff), fontSize: 14),
+    accentTitleSmall: const TextStyle(color: Color(0xffffffff), fontSize: 12),
   ));
 
 ThemeData darkMode = ThemeData(
@@ -115,9 +116,11 @@ ThemeData darkMode = ThemeData(
         // mouseCursor: "",
         ),
     appBarTheme: const AppBarTheme(backgroundColor: Color(0xff0f0f0f)))
-  ..addOwn(OwnThemeFields(
+  ..addOwn(
+    OwnThemeFields(
       scrollbarThumbColor: const Color(0xfff1f1f1).withOpacity(0.7),
       accentTitleMedium: const TextStyle(
-          color: Color(0xff0f0f0f),
-          fontSize: 14,
-          fontWeight: FontWeight.w500)));
+          color: Color(0xff0f0f0f), fontSize: 14, fontWeight: FontWeight.w500),
+      accentTitleSmall: const TextStyle(color: Color(0xff0f0f0f), fontSize: 12),
+    ),
+  );

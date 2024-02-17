@@ -6,9 +6,13 @@ class OwnThemeFields {
   final Color? scrollbarThumbColor;
   final Color? textBaloon;
   final TextStyle? accentTitleMedium;
+  final TextStyle? accentTitleSmall;
 
   OwnThemeFields(
-      {this.scrollbarThumbColor, this.textBaloon, this.accentTitleMedium});
+      {this.scrollbarThumbColor,
+      this.textBaloon,
+      this.accentTitleMedium,
+      this.accentTitleSmall});
 
   factory OwnThemeFields.empty() {
     return OwnThemeFields();

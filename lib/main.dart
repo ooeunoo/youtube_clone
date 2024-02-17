@@ -1,4 +1,5 @@
 import 'package:clone_flutter_youtube/src/navigation/pages.dart';
+import 'package:clone_flutter_youtube/src/route/app_router.dart';
 import 'package:clone_flutter_youtube/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
       theme: lightMode,
       darkTheme: darkMode,
       themeMode: ThemeMode.system,
-      getPages: AppPages.routes,
-      initialRoute: AppPages.initial,
+      initialRoute: AppRouter.initialRoute,
+      onGenerateRoute: AppRouter.generateRoute,
+      navigatorKey: AppRouter.navigatorKey,
     );
   }
 }

@@ -1,10 +1,9 @@
-import 'package:clone_flutter_youtube/src/components/icon/custom_icon.dart';
-import 'package:clone_flutter_youtube/src/constants/asset_path.dart';
-import 'package:clone_flutter_youtube/src/hooks/useBottomsheet.dart';
-import 'package:clone_flutter_youtube/src/screens/home/home.dart';
-import 'package:clone_flutter_youtube/src/screens/profile/profile.dart';
-import 'package:clone_flutter_youtube/src/screens/shorts/shorts.dart';
-import 'package:clone_flutter_youtube/src/screens/subscription/subscription.dart';
+import 'package:clone_flutter_youtube/src/component/icon/custom_icon.dart';
+import 'package:clone_flutter_youtube/src/constant/asset_path.dart';
+import 'package:clone_flutter_youtube/src/screen/home/home.dart';
+import 'package:clone_flutter_youtube/src/screen/profile/profile.dart';
+import 'package:clone_flutter_youtube/src/screen/shorts/shorts.dart';
+import 'package:clone_flutter_youtube/src/screen/subscription/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -16,14 +15,10 @@ class App extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final bottomTabIndex = useState<int>(0);
-    final uploadVideoBottomSheetController = useBottomSheet(context,
-        builder: (BuildContext context, BottomSheetController controller) {
-      return Container();
-    }, isDismissible: true, enableDrag: true);
 
     void changeBottomNaviagtionIndex(int index) {
       if (BottomTab.values[index] == BottomTab.uploadVideo) {
-        uploadVideoBottomSheetController.open();
+        // uploadVideoBottomSheetController.open();
       } else {
         bottomTabIndex.value = index;
       }
