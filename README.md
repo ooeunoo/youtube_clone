@@ -11,7 +11,7 @@ flutter run
 
 ## Demo
 
-![](https://github.com/eun-dev/youtube_clone/tree/main/assets/github/demo.gif)
+![](https://github.com/eun-dev/youtube_clone/blob/main/assets/github/demo.gif)
 
 
 ## Tech Stack
