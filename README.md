@@ -10,8 +10,9 @@ flutter run
 
 
 ## Demo
+<img src="./assets/github/demo.gif"/>
 
-![](https://github.com/eun-dev/youtube_clone/blob/main/assets/github/demo.gif)
+<!-- ![](https://github.com/eun-dev/youtube_clone/blob/main/assets/github/demo.gif) -->
 
 
 ## Tech Stack
