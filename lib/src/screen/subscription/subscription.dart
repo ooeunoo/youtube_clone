@@ -30,9 +30,7 @@ class Subscription extends HookWidget {
 
     final videos = useState<List<Video>>([]);
     final nextPageToken = useState<String?>(null);
-
-    final List<bool> isPressed =
-        List.generate(buttonNames.length, (index) => false);
+    final selectedCategoryIndex = useState<int>(1);
 
     void load() async {
       if (isMounted()) {
@@ -82,58 +80,78 @@ class Subscription extends HookWidget {
                 ),
                 // Reduce the horizontal padding applied to the SubscribeChannelIcon
                 SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 150,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: channelList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal: 5), // Adjust horizontal padding here
-                          child: SubscribeChannelIcon(
-                            context,
-                            channelList[index].url,
-                            channelList[index].title,
-                          ),
-                        );
-                      },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      right: 8.0,
+                      left: 8,
+                    ),
+                    child: SizedBox(
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: channelList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal:
+                                    5), // Adjust horizontal padding here
+                            child: SubscribeChannelIcon(
+                              context,
+                              channelList[index].url,
+                              channelList[index].title,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: buttonNames.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5), // Adjust horizontal padding here
-                          child: TextButton(
-                            onPressed: () {
-                              // Toggle the pressed state of the button
-                              isPressed[index] = !isPressed[index];
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: isPressed[index]
-                                  ? MaterialStateProperty.all(Colors.white)
-                                  : null,
-                            ),
-                            child: Text(
-                              buttonNames[index],
-                              style: TextStyle(
-                                color: isPressed[index]
-                                    ? Colors.black
-                                    : Colors.grey,
-                                fontSize: 16,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        right: 8.0, left: 8.0, bottom: 10),
+                    child: SizedBox(
+                      height: 30,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: buttonNames.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    5), // Adjust horizontal padding here
+                            child: TextButton(
+                              onPressed: () {
+                                selectedCategoryIndex.value = index;
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: selectedCategoryIndex.value ==
+                                        index
+                                    ? MaterialStateProperty.all(Colors.white)
+                                    : MaterialStateProperty.all(
+                                        Theme.of(context).cardColor),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10.0), // Adjust border radius here
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                buttonNames[index],
+                                style: TextStyle(
+                                  color: selectedCategoryIndex.value == index
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 11,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

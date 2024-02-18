@@ -1,19 +1,40 @@
+// To parse this JSON data, do
+//
+//     final empty = emptyFromJson(jsonString);
+
+import 'dart:convert';
+
 import 'package:clone_flutter_youtube/src/model/youtube/channel/channel.dart';
 import 'package:clone_flutter_youtube/src/model/youtube/pageInfo/page_info.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'channel_response.freezed.dart';
-part 'channel_response.g.dart';
+ChannelResponse emptyFromJson(String str) => ChannelResponse.fromJson(json.decode(str));
 
-@freezed
-class ChannelResponse with _$ChannelResponse {
-  factory ChannelResponse({
-    required String kind,
-    required String etag,
-    required PageInfo pageInfo,
-    required List<Channel> items,
-  }) = _ChannelResponse;
+String emptyToJson(ChannelResponse data) => json.encode(data.toJson());
 
-  factory ChannelResponse.fromJson(Map<String, dynamic> json) =>
-      _$ChannelResponseFromJson(json);
+class ChannelResponse {
+  String kind;
+  String etag;
+  PageInfo pageInfo;
+  List<Channel> items;
+
+  ChannelResponse({
+    required this.kind,
+    required this.etag,
+    required this.pageInfo,
+    required this.items,
+  });
+
+  factory ChannelResponse.fromJson(Map<String, dynamic> json) => ChannelResponse(
+        kind: json["kind"],
+        etag: json["etag"],
+        pageInfo: PageInfo.fromJson(json["pageInfo"]),
+        items: List<Channel>.from(json["items"].map((x) => Channel.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "kind": kind,
+        "etag": etag,
+        "pageInfo": pageInfo.toJson(),
+        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+      };
 }

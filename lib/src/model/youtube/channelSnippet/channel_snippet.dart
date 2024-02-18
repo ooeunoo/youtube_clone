@@ -1,20 +1,42 @@
 import 'package:clone_flutter_youtube/src/model/youtube/channelThumbnails/channel_thumbnails.dart';
 import 'package:clone_flutter_youtube/src/model/youtube/localized/localized.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'channel_snippet.freezed.dart';
-part 'channel_snippet.g.dart';
+class ChannelSnippet {
+  String title;
+  String description;
+  String customUrl;
+  DateTime publishedAt;
+  ChannelThumbnails thumbnails;
+  Localized localized;
+  String country;
 
-@freezed
-class ChannelSnippet with _$ChannelSnippet {
-  factory ChannelSnippet({
-    required String title,
-    required String description,
-    required DateTime publishedAt,
-    required ChannelThumbnails thumbnails,
-    required Localized localized,
-  }) = _ChannelSnippet;
+  ChannelSnippet({
+    required this.title,
+    required this.description,
+    required this.customUrl,
+    required this.publishedAt,
+    required this.thumbnails,
+    required this.localized,
+    required this.country,
+  });
 
-  factory ChannelSnippet.fromJson(Map<String, dynamic> json) =>
-      _$ChannelSnippetFromJson(json);
+  factory ChannelSnippet.fromJson(Map<String, dynamic> json) => ChannelSnippet(
+        title: json["title"],
+        description: json["description"],
+        customUrl: json["customUrl"],
+        publishedAt: DateTime.parse(json["publishedAt"]),
+        thumbnails: ChannelThumbnails.fromJson(json["thumbnails"]),
+        localized: Localized.fromJson(json["localized"]),
+        country: json["country"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "description": description,
+        "customUrl": customUrl,
+        "publishedAt": publishedAt.toIso8601String(),
+        "thumbnails": thumbnails.toJson(),
+        "localized": localized.toJson(),
+        "country": country,
+      };
 }

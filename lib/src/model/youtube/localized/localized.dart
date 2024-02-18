@@ -1,15 +1,29 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// To parse this JSON data, do
+//
+//     final localized = localizedFromJson(jsonString);
 
-part 'localized.freezed.dart';
-part 'localized.g.dart';
+import 'dart:convert';
 
-@freezed
-class Localized  with _$Localized{
-  factory Localized({
-    required String title,
-    required String description,
-  }) = _Localized;
+Localized localizedFromJson(String str) => Localized.fromJson(json.decode(str));
 
-  factory Localized.fromJson(Map<String, dynamic> json) =>
-      _$LocalizedFromJson(json);
+String localizedToJson(Localized data) => json.encode(data.toJson());
+
+class Localized {
+  String title;
+  String description;
+
+  Localized({
+    required this.title,
+    required this.description,
+  });
+
+  factory Localized.fromJson(Map<String, dynamic> json) => Localized(
+        title: json["title"],
+        description: json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "description": description,
+      };
 }

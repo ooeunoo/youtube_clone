@@ -235,7 +235,7 @@ Widget _Comments(BuildContext context, Video video) {
               const SizedBox(
                 width: 10,
               ),
-              Text(formatNumberUnit(int.parse(commentCount)),
+              Text(formatNumberUnit(int.parse(commentCount ?? '0')),
                   style: Theme.of(context).textTheme.labelMedium)
             ],
           ),

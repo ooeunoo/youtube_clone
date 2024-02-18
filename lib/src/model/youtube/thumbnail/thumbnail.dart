@@ -1,16 +1,33 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// To parse this JSON data, do
+//
+//     final thumbnail = thumbnailFromJson(jsonString);
 
-part 'thumbnail.freezed.dart';
-part 'thumbnail.g.dart';
+import 'dart:convert';
 
-@freezed
-class Thumbnail  with _$Thumbnail{
-  factory Thumbnail({
-    required String url,
-    required int width,
-    required int height,
-  }) = _Thumbnail;
+Thumbnail thumbnailFromJson(String str) => Thumbnail.fromJson(json.decode(str));
 
-  factory Thumbnail.fromJson(Map<String, dynamic> json) =>
-      _$ThumbnailFromJson(json);
+String thumbnailToJson(Thumbnail data) => json.encode(data.toJson());
+
+class Thumbnail {
+  String url;
+  int width;
+  int height;
+
+  Thumbnail({
+    required this.url,
+    required this.width,
+    required this.height,
+  });
+
+  factory Thumbnail.fromJson(Map<String, dynamic> json) => Thumbnail(
+        url: json["url"],
+        width: json["width"],
+        height: json["height"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "url": url,
+        "width": width,
+        "height": height,
+      };
 }

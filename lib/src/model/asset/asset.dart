@@ -1,11 +1,25 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// To parse this JSON data, do
+//
+//     final asset = assetFromJson(jsonString);
 
-part 'asset.freezed.dart';
-part 'asset.g.dart';
+import 'dart:convert';
 
-@freezed
-class Asset with _$Asset {
-  factory Asset(String path) = _Asset;
+Asset assetFromJson(String str) => Asset.fromJson(json.decode(str));
 
-  factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
+String assetToJson(Asset data) => json.encode(data.toJson());
+
+class Asset {
+  String path;
+
+  Asset({
+    required this.path,
+  });
+
+  factory Asset.fromJson(Map<String, dynamic> json) => Asset(
+        path: json["path"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "path": path,
+      };
 }

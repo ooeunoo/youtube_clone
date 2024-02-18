@@ -1,17 +1,40 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// To parse this JSON data, do
+//
+//     final videoStatistics = videoStatisticsFromJson(jsonString);
 
-part 'video_statistics.freezed.dart';
-part 'video_statistics.g.dart';
+import 'dart:convert';
 
-@freezed
-class VideoStatistics  with _$VideoStatistics{
-  factory VideoStatistics({
-    required String viewCount,
-    required String likeCount,
-    required String favoriteCount,
-    required String commentCount,
-  }) = _VideoStatistics;
+VideoStatistics videoStatisticsFromJson(String str) =>
+    VideoStatistics.fromJson(json.decode(str));
+
+String videoStatisticsToJson(VideoStatistics data) =>
+    json.encode(data.toJson());
+
+class VideoStatistics {
+  String viewCount;
+  String likeCount;
+  String favoriteCount;
+  String? commentCount;
+
+  VideoStatistics({
+    required this.viewCount,
+    required this.likeCount,
+    required this.favoriteCount,
+    this.commentCount,
+  });
 
   factory VideoStatistics.fromJson(Map<String, dynamic> json) =>
-      _$VideoStatisticsFromJson(json);
+      VideoStatistics(
+        viewCount: json["viewCount"],
+        likeCount: json["likeCount"],
+        favoriteCount: json["favoriteCount"],
+        commentCount: json["commentCount"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "viewCount": viewCount,
+        "likeCount": likeCount,
+        "favoriteCount": favoriteCount,
+        "commentCount": commentCount,
+      };
 }

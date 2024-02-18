@@ -1,15 +1,29 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// To parse this JSON data, do
+//
+//     final pageInfo = pageInfoFromJson(jsonString);
 
-part 'page_info.freezed.dart';
-part 'page_info.g.dart';
+import 'dart:convert';
 
-@freezed
-class PageInfo with _$PageInfo {
-  factory PageInfo({
-    required int totalResults,
-    required int resultsPerPage,
-  }) = _PageInfo;
+PageInfo pageInfoFromJson(String str) => PageInfo.fromJson(json.decode(str));
 
-  factory PageInfo.fromJson(Map<String, dynamic> json) =>
-      _$PageInfoFromJson(json);
+String pageInfoToJson(PageInfo data) => json.encode(data.toJson());
+
+class PageInfo {
+  int totalResults;
+  int resultsPerPage;
+
+  PageInfo({
+    required this.totalResults,
+    required this.resultsPerPage,
+  });
+
+  factory PageInfo.fromJson(Map<String, dynamic> json) => PageInfo(
+        totalResults: json["totalResults"],
+        resultsPerPage: json["resultsPerPage"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "totalResults": totalResults,
+        "resultsPerPage": resultsPerPage,
+      };
 }
