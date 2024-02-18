@@ -1,16 +1,32 @@
-# clone_flutter_youtube
+# Youtube Clone
 
-A new Flutter project.
+Clone YouTube's default UI and features using Flutter
 
-## Getting Started
+## Installation or Running
 
-This project is a starting point for a Flutter application.
+```bash
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Demo
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](https://github.com/eun-dev/youtube_clone/tree/main/assets/github/demo.gif)
+
+
+## Tech Stack
+
+**language:**: Flutter
+
+**packages:** flutter_hooks
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Authors
+
+- [@eun-dev](https://github.com/eun-dev)
+

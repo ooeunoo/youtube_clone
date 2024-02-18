@@ -8,7 +8,6 @@ class ChannelSnippet {
   DateTime publishedAt;
   ChannelThumbnails thumbnails;
   Localized localized;
-  String country;
 
   ChannelSnippet({
     required this.title,
@@ -17,7 +16,6 @@ class ChannelSnippet {
     required this.publishedAt,
     required this.thumbnails,
     required this.localized,
-    required this.country,
   });
 
   factory ChannelSnippet.fromJson(Map<String, dynamic> json) => ChannelSnippet(
@@ -27,7 +25,6 @@ class ChannelSnippet {
         publishedAt: DateTime.parse(json["publishedAt"]),
         thumbnails: ChannelThumbnails.fromJson(json["thumbnails"]),
         localized: Localized.fromJson(json["localized"]),
-        country: json["country"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,6 +34,5 @@ class ChannelSnippet {
         "publishedAt": publishedAt.toIso8601String(),
         "thumbnails": thumbnails.toJson(),
         "localized": localized.toJson(),
-        "country": country,
       };
 }

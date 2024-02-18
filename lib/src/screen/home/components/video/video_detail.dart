@@ -251,7 +251,7 @@ Widget _Comments(BuildContext context, Video video) {
               const SizedBox(
                 width: 10,
               ),
-              Text("진짜 진자 굿", style: Theme.of(context).textTheme.titleSmall)
+              Text("Good Video😊", style: Theme.of(context).textTheme.titleSmall)
             ],
           )
         ]),
