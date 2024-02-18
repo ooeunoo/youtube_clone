@@ -10,7 +10,7 @@ flutter run
 
 
 ## Demo
-<img src="./assets/github/demo.gif" hwidth="50%" height="50%"/>
+<img src="./assets/github/demo.gif" width="50%" height="100px"/>
 
 <!-- ![](https://github.com/eun-dev/youtube_clone/blob/main/assets/github/demo.gif) -->
 
